@@ -48,6 +48,11 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
   network_interface_id = aws_instance.project-ec2.primary_network_interface_id
 }
 
+resource "aws_eip_association" "my_eip_to_ec2" {
+ instance_id = aws_instance.project-ec2.id
+ allocation_id = aws_eip.my_eip.id
+}
+
 output "eip" {
   value = aws_eip.my_eip.public_ip
 }
